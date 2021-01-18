@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+    url-shortener:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: batly
+        ports:
+            - "9000:4000"
+    
