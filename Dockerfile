@@ -1,11 +1,14 @@
-FROM node:12-slim
+FROM node:18-alpine
 
-RUN mkdir -p /src/app
-WORKDIR /src/app
-COPY package.json /src/app
+
+WORKDIR /src
+
+COPY package.json package-lock.json /src/
 
 RUN npm install
 
-COPY . /src/app
+COPY . /src
+
+EXPOSE 2006
 
 CMD ["npm","start"]

@@ -3,7 +3,7 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-const url = process.env.DB_CONNECTION;
+const url = 'mongodb://${PROCESS.ENV.MONGODB_USER}:${PROCESS.ENV.MONGODB_PWD}@${PROCESS.ENV.MONGODB_HOST}:${PROCESS.ENV.MONGODB_PORT}/${PROCESS.ENV.MONGODB_DB}';
 
 mongoose.connect(url, { useNewUrlParser: true,useUnifiedTopology: true });
 
