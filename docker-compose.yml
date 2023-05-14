@@ -1,11 +1,34 @@
 version: '3'
 
 services:
-    url-shortener:
-        build:
-            context: .
-            dockerfile: Dockerfile
-        container_name: batly
+    app:
+        build: .
+        environment:
+            - MONGODB_URL=value
         ports:
-            - "9000:4000"
+            - "2006:2006"
+        depends_on:
+            - mongodb
+        volumes:
+            - .:/src        
+        networks:
+            - node-network
     
+    mongodb:
+        image: mongo:6-jammy
+        ports:
+            - ${MONGODB_PORT}:27017
+        volumes:
+            - mongodata:/data/db
+        networks:
+            - node-network
+        
+
+
+networks:
+    node-network:
+        driver: bridge
+
+volumes:
+    mongodata:
+        driver: local    
